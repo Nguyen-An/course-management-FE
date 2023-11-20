@@ -11,7 +11,7 @@
                 <img src="../../../assets/image/icon-reload.svg">
                 Tải lại danh sách
             </button>
-            <button class="btn btn-add">
+            <button class="btn btn-add" (click)="openStudentModal()">
                 <img src="../../../assets/image/icon-add.svg">
                 Thêm khoá học
             </button>
@@ -69,5 +69,5 @@
             <button>Xoá danh sách được chọn</button>
         </tfoot>
       </table>
-
 </div>
+<app-course-form [data]="modalData" [isOpen]="isModalOpen" (closeModal)="onCloseModal()"></app-course-form>

@@ -8,7 +8,8 @@ import { StudentComponent } from './component/student/student.component';
 import { TeacherComponent } from './component/teacher/teacher.component';
 import { CourseComponent } from './component/course/course.component';
 import { ReportComponent } from './component/report/report.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { CourseFormComponent } from './component/course/course-form/course-form.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +18,14 @@ import { FormsModule } from '@angular/forms';
     StudentComponent,
     TeacherComponent,
     CourseComponent,
-    ReportComponent
+    ReportComponent,
+    CourseFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

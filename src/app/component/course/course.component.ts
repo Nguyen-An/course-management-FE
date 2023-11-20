@@ -21,4 +21,16 @@ export class CourseComponent {
     const checked = event.target.checked;
     this.students.forEach(student => student.selected = checked);
   }
+
+  isModalOpen = false;
+  modalData: any;
+
+  openStudentModal() {
+    this.isModalOpen = true;
+    this.modalData = { /* Your data here */ };
+  }
+
+  onCloseModal() {
+    this.isModalOpen = false;
+  }
 }
