@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.container{
+    .title{
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        color: #3D3D3D;
+    }
+
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+  
+a{
+    text-decoration: none;
+  }
+  
+  button:hover{
+    opacity: 0.9;
+}
