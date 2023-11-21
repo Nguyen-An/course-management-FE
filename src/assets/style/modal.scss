@@ -63,9 +63,24 @@ input {
     padding: 12px;
 }
 
-.action-btn{
+.action-btn {
     display: flex;
     flex-direction: row-reverse;
     margin: 24px 0 0 0;
 }
 
+.custom-textarea {
+    width: 100%;
+}
+
+.custom-textarea textarea {
+    height: 200px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
+    resize: none;
+    border-radius: 10px;
+    border: 1px solid #8E8E8E;
+    background: #FFF;
+    outline: none;
+}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-detail-lesson',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./course-detail-lesson.component.scss']
 })
 export class CourseDetailLessonComponent {
+
+
   students = [
     { id: 1, name: 'Tên bài 1', link: 'Link video 1', describeLesson: 'Miêu tả 1', details: '', action: '', selected: false },
     { id: 2, name: 'Tên bài 2', link: 'Link video 2', describeLesson: 'Miêu tả 2', details: '', action: '', selected: false },
@@ -24,11 +27,25 @@ export class CourseDetailLessonComponent {
   isModalOpen = false;
   modalData: any;
 
-  openModal() {
+  openModal(record?: any) {
+    if (record) {
+      this.modalData = {
+        record: record,
+        title: 'Chỉnh sửa thông tin',
+        type: 'UPDATE'
+      };
+    } else {
+      this.modalData = {
+        title: 'Thêm bài học mới',
+        type: 'CREATE'
+      };
+    }
+
     this.isModalOpen = true;
-    this.modalData = { /* Your data here */ };
   }
   onCloseModal() {
     this.isModalOpen = false;
   }
+
+
 }

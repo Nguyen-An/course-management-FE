@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-detail',
@@ -6,9 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./course-detail.component.scss']
 })
 export class CourseDetailComponent {
+  constructor(private router: Router) {
+    
+  }
+
   courses = [
     { id: 1, name: 'Ngữ văn 1', details: '', action: '', selected: false },
-    { id: 1, name: 'Ngữ văn 1', details: '', action: '', selected: false },
+    { id: 2, name: 'Ngữ văn 1', details: '', action: '', selected: false },
   ];
 
   isModalOpen = false;
@@ -20,5 +25,9 @@ export class CourseDetailComponent {
   }
   onCloseModal() {
     this.isModalOpen = false;
+  }
+
+  onSetupLesson(id: any) {
+    this.router.navigate(['/course/detail/setup-lesson', id], { queryParams: { type: 1 } });
   }
 }

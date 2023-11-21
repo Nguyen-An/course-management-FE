@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./course.component.scss']
 })
 export class CourseComponent {
+  constructor(private router: Router) {
+    
+  }
+
   students = [
     { id: 1, name: 'Ngữ văn 1', price: '1000000.0', type: 'Khoá video', details: '', action: '', selected: false },
     { id: 2, name: 'Ngữ văn 2', price: '1000000.0', type: 'Khoá video', details: '', action: '', selected: false },
@@ -25,12 +30,28 @@ export class CourseComponent {
   isModalOpen = false;
   modalData: any;
 
-  openModal() {
+  openModal(record?: any) {
+    if (record) {
+      this.modalData = {
+        record: record,
+        title: 'Chỉnh sửa thông tin',
+        type: 'UPDATE'
+      };
+    } else {
+      this.modalData = {
+        title: 'Thêm khoá học mới',
+        type: 'CREATE'
+      };
+    }
+
     this.isModalOpen = true;
-    this.modalData = { /* Your data here */ };
   }
 
   onCloseModal() {
     this.isModalOpen = false;
+  }
+
+  onDetail(id: any) {
+    this.router.navigate(['/course/detail', id], { queryParams: { type: 1 } });
   }
 }

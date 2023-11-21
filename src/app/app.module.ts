@@ -14,6 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CourseDetailComponent } from './component/course/course-detail/course-detail.component';
 import { CourseDetailChaperFormComponent } from './component/course/course-detail/course-detail-chaper-form/course-detail-chaper-form.component';
 import { CourseDetailLessonComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson.component';
+import { CourseDetailLessonFormComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-form/course-detail-lesson-form.component';
+import { CourseDetailLessonDetailComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail.component';
+import { CourseDetailLessonDetailFormComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail-form/course-detail-lesson-detail-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { CourseDetailLessonComponent } from './component/course/course-detail/co
     CourseFormComponent,
     CourseDetailComponent,
     CourseDetailChaperFormComponent,
-    CourseDetailLessonComponent
+    CourseDetailLessonComponent,
+    CourseDetailLessonFormComponent,
+    CourseDetailLessonDetailComponent,
+    CourseDetailLessonDetailFormComponent
   ],
   imports: [
     BrowserModule,

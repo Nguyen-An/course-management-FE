@@ -37,7 +37,7 @@
                     <td class="text-left" style="width: 100px;">{{ courses.id }}</td>
                     <td class="text-left" style="width: 300px;"> {{ courses.name }}</td>
                     <td class="text-center" style="width: 230px; justify-content: center">
-                        <button class=" btn-establish">Thiết lập bài giảng</button>
+                        <button class=" btn-establish" (click)="onSetupLesson(courses.id)">Thiết lập bài giảng</button>
                     </td>
                     <td class="text-center" style="width: 140px; justify-content: center">
                         <button class=" btn-remove">Xoá chương</button>

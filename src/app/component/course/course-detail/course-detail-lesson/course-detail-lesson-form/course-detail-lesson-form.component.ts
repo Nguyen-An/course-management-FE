@@ -1,32 +1,29 @@
-// student-modal.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {
-  FormControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
 import { CourseService } from 'src/app/service/course.service';
 
 @Component({
-  selector: 'app-course-form',
-  templateUrl: './course-form.component.html',
-  styleUrls: ['./course-form.component.scss'],
+  selector: 'app-course-detail-lesson-form',
+  templateUrl: './course-detail-lesson-form.component.html',
+  styleUrls: ['./course-detail-lesson-form.component.scss']
 })
-export class CourseFormComponent {
+export class CourseDetailLessonFormComponent {
   @Input() data: any;
   @Input() isOpen: boolean = true;
   @Output() closeModal = new EventEmitter<void>();
 
-
+  onCloseModal() {
+    this.closeModal.emit();
+  }
   
   userData: any;
   error: string = '';
 
+
+
   constructor(private courseService: CourseService) {}
 
-  name: string = '';
-  price: number = 0;
+  courseName: string = '';
+  coursePrice: number = 0;
   courseCategory: string = 'programming';
 
   categories: string[] = ['programming', 'design', 'business'];
@@ -35,19 +32,10 @@ export class CourseFormComponent {
     // Thực hiện các thao tác lưu trữ dữ liệu ở đây
     console.log(
       'Đã submit:',
-      this.name,
-      this.price,
+      this.courseName,
+      this.coursePrice,
       this.courseCategory
     );
-  }
-
-  ngOnChanges() {
-    
-    if (this.data?.type == 'UPDATE') {
-
-      this.name = this.data.record.name;
-      this.price = this.data.record.price;
-    }
   }
 
   ngOnInit() {
@@ -60,12 +48,5 @@ export class CourseFormComponent {
         this.error = 'Error loading user data.';
       }
     );
-  }
-
-  onCloseModal() {
-    this.name= '';
-    this.price = 0;
-    this.courseCategory= 'programming';
-    this.closeModal.emit();
   }
 }

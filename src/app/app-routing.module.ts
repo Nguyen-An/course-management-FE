@@ -7,6 +7,7 @@ import { CourseComponent } from './component/course/course.component';
 import { ReportComponent } from './component/report/report.component';
 import { CourseDetailComponent } from './component/course/course-detail/course-detail.component';
 import { CourseDetailLessonComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson.component';
+import { CourseDetailLessonDetailComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'course/list', component: CourseComponent },
   { path: 'course/detail/:id', component: CourseDetailComponent },
   { path: 'course/detail/setup-lesson/:id', component: CourseDetailLessonComponent },
+  { path: 'course/detail/setup-lesson/detail/:id', component: CourseDetailLessonDetailComponent },
   { path: 'report/list', component: ReportComponent },
 ];
 
