@@ -49,7 +49,8 @@ label {
     margin: 16px 0;
 }
 
-select, input {
+select,
+input {
     border-radius: 10px;
     border: 1px solid #8E8E8E;
     background: #FFF;
@@ -61,3 +62,10 @@ select, input {
     line-height: normal;
     padding: 12px;
 }
+
+.action-btn{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 24px 0 0 0;
+}
+

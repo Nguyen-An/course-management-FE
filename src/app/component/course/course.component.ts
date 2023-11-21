@@ -25,7 +25,7 @@ export class CourseComponent {
   isModalOpen = false;
   modalData: any;
 
-  openStudentModal() {
+  openModal() {
     this.isModalOpen = true;
     this.modalData = { /* Your data here */ };
   }

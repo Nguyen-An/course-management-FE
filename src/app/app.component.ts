@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  isAuthentication = false;
+  isAuthentication = true;
   
   // xử lý đăng nhập
   login() {

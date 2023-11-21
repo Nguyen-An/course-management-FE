@@ -5,13 +5,17 @@ import { StudentComponent } from './component/student/student.component';
 import { TeacherComponent } from './component/teacher/teacher.component';
 import { CourseComponent } from './component/course/course.component';
 import { ReportComponent } from './component/report/report.component';
+import { CourseDetailComponent } from './component/course/course-detail/course-detail.component';
+import { CourseDetailLessonComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'student', component: StudentComponent },
-  { path: 'teacher', component: TeacherComponent },
-  { path: 'course', component: CourseComponent },
-  { path: 'report', component: ReportComponent },
+  { path: 'student/list', component: StudentComponent },
+  { path: 'teacher/list', component: TeacherComponent },
+  { path: 'course/list', component: CourseComponent },
+  { path: 'course/detail/:id', component: CourseDetailComponent },
+  { path: 'course/detail/setup-lesson/:id', component: CourseDetailLessonComponent },
+  { path: 'report/list', component: ReportComponent },
 ];
 
 @NgModule({

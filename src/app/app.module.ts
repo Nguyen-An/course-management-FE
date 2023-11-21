@@ -10,6 +10,10 @@ import { CourseComponent } from './component/course/course.component';
 import { ReportComponent } from './component/report/report.component';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { CourseFormComponent } from './component/course/course-form/course-form.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CourseDetailComponent } from './component/course/course-detail/course-detail.component';
+import { CourseDetailChaperFormComponent } from './component/course/course-detail/course-detail-chaper-form/course-detail-chaper-form.component';
+import { CourseDetailLessonComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +23,17 @@ import { CourseFormComponent } from './component/course/course-form/course-form.
     TeacherComponent,
     CourseComponent,
     ReportComponent,
-    CourseFormComponent
+    CourseFormComponent,
+    CourseDetailComponent,
+    CourseDetailChaperFormComponent,
+    CourseDetailLessonComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
