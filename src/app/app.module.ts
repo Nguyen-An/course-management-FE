@@ -19,6 +19,9 @@ import { CourseDetailLessonDetailComponent } from './component/course/course-det
 import { CourseDetailLessonDetailFormComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail-form/course-detail-lesson-detail-form.component';
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { LineComponent } from './component/home/line/line.component';
+import { ColumnComponent } from './component/home/column/column.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     CourseDetailLessonComponent,
     CourseDetailLessonFormComponent,
     CourseDetailLessonDetailComponent,
-    CourseDetailLessonDetailFormComponent
+    CourseDetailLessonDetailFormComponent,
+    LineComponent,
+    ColumnComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
