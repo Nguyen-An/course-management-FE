@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { AlertService } from 'src/app/service/alert.service';
 import { CourseService } from 'src/app/service/course.service';
 
 @Component({
@@ -23,7 +24,10 @@ export class CourseFormComponent {
   userData: any;
   error: string = '';
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private alertSrv: AlertService
+  ) {}
 
   name: string = '';
   price: number = 0;
@@ -39,6 +43,7 @@ export class CourseFormComponent {
       this.price,
       this.courseCategory
     );
+    this.alertSrv.showSuccess('Thêm mới thành công', 'Thành công!');
   }
 
   ngOnChanges() {
