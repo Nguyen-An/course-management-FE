@@ -17,6 +17,11 @@ import { CourseDetailLessonComponent } from './component/course/course-detail/co
 import { CourseDetailLessonFormComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-form/course-detail-lesson-form.component';
 import { CourseDetailLessonDetailComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail.component';
 import { CourseDetailLessonDetailFormComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail-form/course-detail-lesson-detail-form.component';
+import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { LineComponent } from './component/home/line/line.component';
+import { ColumnComponent } from './component/home/column/column.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +37,19 @@ import { CourseDetailLessonDetailFormComponent } from './component/course/course
     CourseDetailLessonComponent,
     CourseDetailLessonFormComponent,
     CourseDetailLessonDetailComponent,
-    CourseDetailLessonDetailFormComponent
+    CourseDetailLessonDetailFormComponent,
+    LineComponent,
+    ColumnComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
