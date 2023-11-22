@@ -43,7 +43,7 @@ export class CourseFormComponent {
       this.price,
       this.courseCategory
     );
-    this.alertSrv.showSuccess('Thêm mới thành công', 'Thành công!');
+    this.alertSrv.showSuccess("Thêm mới thành công", "Thành công!");
   }
 
   ngOnChanges() {

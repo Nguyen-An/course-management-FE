@@ -17,6 +17,8 @@ import { CourseDetailLessonComponent } from './component/course/course-detail/co
 import { CourseDetailLessonFormComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-form/course-detail-lesson-form.component';
 import { CourseDetailLessonDetailComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail.component';
 import { CourseDetailLessonDetailFormComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail-form/course-detail-lesson-detail-form.component';
+import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -36,10 +38,12 @@ import { CourseDetailLessonDetailFormComponent } from './component/course/course
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
