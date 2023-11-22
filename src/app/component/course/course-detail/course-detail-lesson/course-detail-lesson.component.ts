@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-detail-lesson',
@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./course-detail-lesson.component.scss']
 })
 export class CourseDetailLessonComponent {
-
+  isModalOpen = false;
+  modalData: any;
+  typeId: number = 0;
 
   students = [
     { id: 1, name: 'Tên bài 1', link: 'Link video 1', describeLesson: 'Miêu tả 1', details: '', action: '', selected: false },
@@ -19,13 +21,24 @@ export class CourseDetailLessonComponent {
     { id: 7, name: 'Tên bài 7', link: 'Link video 7', describeLesson: 'Miêu tả 7', details: '', action: '', selected: false },
   ];
 
+  constructor(private router: Router, private route: ActivatedRoute) {
+    
+  }
+
   selectAll(event: any): void {
     const checked = event.target.checked;
     this.students.forEach(student => student.selected = checked);
   }
 
-  isModalOpen = false;
-  modalData: any;
+
+  
+  ngOnInit() {
+    // Sử dụng paramMap để lấy giá trị của 'type' từ queryParams
+    this.route.queryParams.subscribe(params => {
+      this.typeId = params['type'];
+      console.log('Type ID:', this.typeId);
+    });
+  }
 
   openModal(record?: any) {
     if (record) {
@@ -47,8 +60,8 @@ export class CourseDetailLessonComponent {
     this.isModalOpen = false;
   }
 
-  onDetail() {
-    
+  onDetail(id: any) {
+    this.router.navigate(['/course/detail/setup-lesson/detail/', id], { queryParams: { type: 1 } });
   }
 
 }

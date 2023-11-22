@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-detail',
@@ -7,14 +7,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./course-detail.component.scss']
 })
 export class CourseDetailComponent {
-  constructor(private router: Router) {
-    
-  }
+  type: number = 0;
 
   courses = [
     { id: 1, name: 'Ngữ văn 1', details: '', action: '', selected: false },
     { id: 2, name: 'Ngữ văn 1', details: '', action: '', selected: false },
   ];
+
+  constructor(private router: Router, private route: ActivatedRoute) {
+
+  }
+
+  ngOnInit() {
+    // Sử dụng paramMap để lấy giá trị của 'type' từ queryParams
+    this.route.queryParams.subscribe(params => {
+      this.type = params['type'];
+      console.log('Type ID:', this.type);
+    });
+  }
+
 
   isModalOpen = false;
   modalData: any;

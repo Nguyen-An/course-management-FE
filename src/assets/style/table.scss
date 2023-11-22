@@ -9,6 +9,10 @@
 thead {
     width: 100%;
     background-color: #E1CDE4 !important;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
 }
 
 tfoot {
@@ -54,7 +58,11 @@ tbody {
 td {
     padding: 20px;
     display: flex;
-    align-items: center;
+    color: #5E638E;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
 .contact {
@@ -95,7 +103,7 @@ td {
     cursor: pointer;
 }
 
-.btn-edit{
+.btn-edit {
     border-radius: 10px;
     background: #E1C499;
     color: #FFF;
@@ -108,7 +116,7 @@ td {
     cursor: pointer;
 }
 
-.btn-establish{
+.btn-establish {
     border-radius: 10px;
     background: #48B9DD;
     color: #FFF;
@@ -121,7 +129,7 @@ td {
     cursor: pointer;
 }
 
-.btn-remove{
+.btn-remove {
     border-radius: 10px;
     background: #DD4848;
     color: #FFF;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student',
@@ -6,6 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent {
+  isModalOpen = false;
+  modalData: any;
+
+  constructor(private router: Router) {
+    
+  }
+
   students = [
     { id: 1, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
     { id: 2, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
@@ -22,4 +30,30 @@ export class StudentComponent {
     const checked = event.target.checked;
     this.students.forEach(student => student.selected = checked);
   }
+
+  openModal(record?: any) {
+    if (record) {
+      this.modalData = {
+        record: record,
+        title: 'Chỉnh sửa thông tin',
+        type: 'UPDATE'
+      };
+    } else {
+      this.modalData = {
+        title: 'Thêm khoá học mới',
+        type: 'CREATE'
+      };
+    }
+
+    this.isModalOpen = true;
+  }
+
+  onCloseModal() {
+    this.isModalOpen = false;
+  }
+
+  onDetail(id: any) {
+    this.router.navigate(['/student/detail/', id], { queryParams: { type: 1 } });
+  }
+
 }

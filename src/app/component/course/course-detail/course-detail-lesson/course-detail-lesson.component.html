@@ -32,7 +32,7 @@
                   <td class="text-left"  style="width: 150px;"> {{ student.describeLesson }}</td>
 
                   <td class="text-center"  style="width: 180px; justify-content: center">
-                      <button class="btn-detail" (click)="onDetail()">Chi tiết</button>
+                      <button class="btn-detail" (click)="onDetail(student.id)">Chi tiết</button>
                   </td>
                   <td class="text-center" style="width: 140px; justify-content: center">
                       <button class="btn-edit" (click)="openModal(student)">Chỉnh sửa</button>
