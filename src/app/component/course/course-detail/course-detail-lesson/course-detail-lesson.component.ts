@@ -47,5 +47,8 @@ export class CourseDetailLessonComponent {
     this.isModalOpen = false;
   }
 
+  onDetail() {
+    
+  }
 
 }

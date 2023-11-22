@@ -31,15 +31,7 @@ export class CourseDetailLessonDetailFormComponent {
 
   onSubmit() {
     // Thực hiện các thao tác lưu trữ dữ liệu ở đây
-    console.log(
-      'Đã submit:',
-      this.question,
-      this.answer1,
-      this.answer2,
-      this.answer3,
-      this.answer4,
-      this.correctAnswer,
-    );
+    console.log( 'Đã submit:', this.question, this.answer1, this.answer2, this.answer3, this.answer4, this.correctAnswer,);
   }
 
   ngOnInit() {
