@@ -39,14 +39,6 @@ export class CourseDetailLessonFormComponent {
   }
 
   ngOnInit() {
-    this.courseService.getUserData().subscribe(
-      (data) => {
-        this.userData = data;
-        console.log('userData:', this.userData);
-      },
-      (error) => {
-        this.error = 'Error loading user data.';
-      }
-    );
+    
   }
 }

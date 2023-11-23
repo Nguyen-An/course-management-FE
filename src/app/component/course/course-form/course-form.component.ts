@@ -31,46 +31,55 @@ export class CourseFormComponent {
 
   name: string = '';
   price: number = 0;
-  courseCategory: string = 'programming';
+  courseCategory = 1;
 
-  categories: string[] = ['programming', 'design', 'business'];
+  categories = [
+    {id: 1, name: 'Khóa lẻ'},
+    { id: 2, name: 'Khóa meeting'}
+  ];
 
   onSubmit() {
     // Thực hiện các thao tác lưu trữ dữ liệu ở đây
-    console.log(
-      'Đã submit:',
-      this.name,
-      this.price,
-      this.courseCategory
-    );
-    this.alertSrv.showSuccess("Thêm mới thành công", "Thành công!");
+    if (this.data.type == 'UPDATE'){
+      this.courseService.edit(
+        { courseTitle: this.name, coursePrice: this.price},
+        this.data.record.courseId,
+        (res: any) => {
+          if(res){
+            this.alertSrv.showSuccess('Chỉnh sửa thành công', 'Thành công!');
+            this.onCloseModal();
+          }
+        }
+      )
+    }else {
+      this.courseService.create(
+        { courseTitle: this.name, coursePrice: this.price, courseType: this.courseCategory, courseGrade: 10},
+        (res: any) => {
+          if(res){
+            this.alertSrv.showSuccess('Thêm mới thành công', 'Thành công!');
+            this.onCloseModal();
+          }
+        }
+      )
+    }
   }
 
   ngOnChanges() {
-    
     if (this.data?.type == 'UPDATE') {
 
-      this.name = this.data.record.name;
-      this.price = this.data.record.price;
+      this.name = this.data.record.courseTitle;
+      this.price = this.data.record.coursePrice;
     }
   }
 
   ngOnInit() {
-    this.courseService.getUserData().subscribe(
-      (data) => {
-        this.userData = data;
-        console.log('userData:', this.userData);
-      },
-      (error) => {
-        this.error = 'Error loading user data.';
-      }
-    );
+    
   }
 
   onCloseModal() {
     this.name= '';
     this.price = 0;
-    this.courseCategory= 'programming';
+    this.courseCategory= 1;
     this.closeModal.emit();
   }
 }
