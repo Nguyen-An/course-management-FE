@@ -11,7 +11,7 @@
                 <img src="../../../assets/image/icon-reload.svg">
                 Tải lại danh sách
             </button>
-            <button class="btn btn-add">
+            <button class="btn btn-add" (click)="openModal()">
                 <img src="../../../assets/image/icon-add.svg">
                 Thêm giáo viên
             </button>
@@ -59,10 +59,10 @@
                  <img src="../../../assets/image/icon-mail.svg">
             </td>
             <td class="text-center"  style="width: 180px; justify-content: center">
-                <button class="btn-detail">Chi tiết</button>
+                <button class="btn-detail" (click)="onDetail(item.id)">Chi tiết</button>
             </td>
             <td class="text-center" style="width: 140px; justify-content: center">
-                <button class="btn-edit">Chỉnh sửa</button>
+                <button class="btn-edit" (click)=" openModal(item.userId)">Chỉnh sửa</button>
             </td>
           </tr>
         </tbody>
@@ -82,3 +82,5 @@
       </table>
 
 </div>
+
+<app-teacher-form [data]="modalData" [isOpen]="isModalOpen" (closeModal)="onCloseModal()"></app-teacher-form>
