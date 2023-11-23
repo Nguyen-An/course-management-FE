@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/service/alert.service';
+import { CourseService } from 'src/app/service/course.service';
 
 @Component({
   selector: 'app-course',
@@ -7,20 +9,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./course.component.scss']
 })
 export class CourseComponent {
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private courseSrv: CourseService,
+    private alertSrv: AlertService
+    ) {
     
   }
 
-  students = [
-    { id: 1, name: 'Ngữ văn 1', price: '1000000.0', type: 'Khoá video', details: '', action: '', selected: false },
-    { id: 2, name: 'Ngữ văn 2', price: '1000000.0', type: 'Khoá video', details: '', action: '', selected: false },
-    { id: 3, name: 'Ngữ văn 3', price: '1000000.0', type: 'Khoá video', details: '', action: '', selected: false },
-    { id: 4, name: 'Ngữ văn 4', price: '1000000.0', type: 'Khoá video', details: '', action: '', selected: false },
-    { id: 5, name: 'Ngữ văn 5', price: '1000000.0', type: 'Khoá video', details: '', action: '', selected: false },
-    { id: 6, name: 'Ngữ văn 6', price: '1000000.0', type: 'Khoá video', details: '', action: '', selected: false },
-    { id: 7, name: 'Ngữ văn 7', price: '1000000.0', type: 'Khoá video', details: '', action: '', selected: false },
-    { id: 8, name: 'Ngữ văn 8', price: '1000000.0', type: 'Khoá video', details: '', action: '', selected: false },
-  ];
+  ngOnInit(){
+    this.getAllData();
+  }
+
+  getAllData(){
+    let option = {sortDir: 'desc', page: this.page, type: this.type, name: this.keySearch};
+    this.courseSrv.getAll(option, (res: any) => {
+      this.students = res.elements;
+      this.paging = res.paging;
+      this.students.forEach(item => {
+        if (item.courseType == 1) item.courseTypeShow = 'Khóa lẻ';
+        else item.courseTypeShow = 'Khóa Meeting';
+      })
+    })
+  }
+  
+  students: any[] = [];
+  type: string = '';
+  name: string = '';
+  keySearch: string = '';
+  paging: any = {};
+  page = 1;
 
   selectAll(event: any): void {
     const checked = event.target.checked;
@@ -49,9 +67,56 @@ export class CourseComponent {
 
   onCloseModal() {
     this.isModalOpen = false;
+    this.getAllData();
   }
 
   onDetail(id: any) {
-    this.router.navigate(['/course/detail', id], { queryParams: { type: 1 } });
+    this.router.navigate(['/course/detail', id]);
+  }
+
+  refreshData(){
+    this.getAllData();
+    this.alertSrv.showSuccess('Tải lại danh sách thành công', 'Thành công!');
+  }
+
+  changeValueSelect(e: any){
+    switch(e.target.value){
+      case '1':{
+        this.type = '1';
+        break;
+      }
+      case '2':{
+        this.type = '2';
+        break;
+      }
+      case 'all':{
+        this.type = '';
+        break;
+      }
+    };
+    this.getAllData();
+  }
+
+  onSearch(){
+    this.keySearch = this.name;
+    this.getAllData();
+  }
+
+  nextPage(){
+    if (this.paging.page == this.paging.totalPage){
+      this.alertSrv.showError('Không thể mở page tiếp theo', 'Lỗi!')
+    }else{
+      this.page++;
+      this.getAllData();
+    }
+  }
+
+  previousPage(){
+    if (this.paging.page == 1){
+      this.alertSrv.showError('Không thể mở page trước đó', 'Lỗi!')
+    }else{
+      this.page--;
+      this.getAllData();
+    }
   }
 }
