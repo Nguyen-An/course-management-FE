@@ -66,8 +66,18 @@
             </td>
           </tr>
         </tbody>
-        <tfoot>
+        <tfoot style="display: flex; justify-content: space-between;">
             <button>Xoá danh sách được chọn</button>
+            <div style="display: flex; justify-content: space-between;">
+              <p style="margin-left: 20px;">Tổng số {{paging.totalRecord}} bản ghi</p>
+              <div
+                style="display: flex; align-items: center;"
+              >
+                <button (click)="previousPage()"><</button>
+                <div>Hiển thị trang thứ {{paging.page}} / {{paging.totalPage}} trang</div>
+                <button (click)="nextPage()">></button>
+              </div>
+            </div>
         </tfoot>
       </table>
 </div>

@@ -22,9 +22,10 @@ export class CourseComponent {
   }
 
   getAllData(){
-    let option = {sortDir: 'desc', page: 1, type: this.type, name: this.keySearch};
+    let option = {sortDir: 'desc', page: this.page, type: this.type, name: this.keySearch};
     this.courseSrv.getAll(option, (res: any) => {
       this.students = res.elements;
+      this.paging = res.paging;
       this.students.forEach(item => {
         if (item.courseType == 1) item.courseTypeShow = 'Khóa lẻ';
         else item.courseTypeShow = 'Khóa Meeting';
@@ -36,6 +37,8 @@ export class CourseComponent {
   type: string = '';
   name: string = '';
   keySearch: string = '';
+  paging: any = {};
+  page = 1;
 
   selectAll(event: any): void {
     const checked = event.target.checked;
@@ -97,5 +100,23 @@ export class CourseComponent {
   onSearch(){
     this.keySearch = this.name;
     this.getAllData();
+  }
+
+  nextPage(){
+    if (this.paging.page == this.paging.totalPage){
+      this.alertSrv.showError('Không thể mở page tiếp theo', 'Lỗi!')
+    }else{
+      this.page++;
+      this.getAllData();
+    }
+  }
+
+  previousPage(){
+    if (this.paging.page == 1){
+      this.alertSrv.showError('Không thể mở page trước đó', 'Lỗi!')
+    }else{
+      this.page--;
+      this.getAllData();
+    }
   }
 }

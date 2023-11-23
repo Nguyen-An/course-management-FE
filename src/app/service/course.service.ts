@@ -75,4 +75,20 @@ export class CourseService {
       }
     )
   }
+
+  getDetail(option: any, callBack: Function): any{
+    this.http.get(baseUrl + `course/${option}`, { observe: 'response' }).subscribe(
+      (response) => {
+        if (response.body) {
+          callBack(response.body);
+        }
+      },
+      (error) => {
+        if (callBack) {
+          callBack(null);
+          this.alertSrv.showError('Something went wrong', 'Lỗi!');
+        }
+      }
+    )
+  }
 }
