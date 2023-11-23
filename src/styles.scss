@@ -29,6 +29,62 @@ body {
         }
     }
 
+    .info {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 10px;
+        background: #D8C6DB;
+        align-items: center;
+        margin: 20px 0;
+
+        .info-left{
+            color: #798AC4;
+            text-align: center;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            margin-top: 10px;
+
+            .out-line-avatar{
+                width: 100px;
+                height: 100px;
+                background-color: #fff;
+                border-radius: 50%;
+                margin: auto;
+                
+                img{
+                    width: 94px;
+                    height: 94px;
+                    margin: 3px;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .info-right {
+            .items {
+                .item {
+                    display: flex;
+                    align-items: center;
+                    color: #000;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    margin: 8px 0;
+
+                    .item-text{
+                        margin-left: 10px;
+                    }
+
+                }
+
+            }
+        }
+    }
+
 }
 
 ::-webkit-scrollbar {
@@ -66,7 +122,7 @@ button:hover {
     background-color: #D9D9D9;
 }
 
-.btn-add-chapter{
+.btn-add-chapter {
     background-color: #92A6DB;
     padding: 8px 10px;
 

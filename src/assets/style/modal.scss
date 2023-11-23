@@ -84,3 +84,9 @@ input {
     background: #FFF;
     outline: none;
 }
+
+.out-line-body-form{
+    height: calc(100vh - 210px);
+    overflow: auto;
+    padding-bottom: 10px;
+}

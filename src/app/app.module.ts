@@ -17,6 +17,8 @@ import { CourseDetailLessonComponent } from './component/course/course-detail/co
 import { CourseDetailLessonFormComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-form/course-detail-lesson-form.component';
 import { CourseDetailLessonDetailComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail.component';
 import { CourseDetailLessonDetailFormComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail-form/course-detail-lesson-detail-form.component';
+import { StudentFormComponent } from './component/student/student-form/student-form.component';
+import { StudentDetailComponent } from './component/student/student-detail/student-detail.component';
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -38,6 +40,8 @@ import { ColumnComponent } from './component/home/column/column.component';
     CourseDetailLessonFormComponent,
     CourseDetailLessonDetailComponent,
     CourseDetailLessonDetailFormComponent,
+    StudentFormComponent,
+    StudentDetailComponent,
     LineComponent,
     ColumnComponent
   ],

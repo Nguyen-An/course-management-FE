@@ -18,7 +18,8 @@ export class CourseDetailComponent {
     private alertSrv: AlertService
     ) {
     
-  }
+  };
+  type: number = 0;
 
   courseId: any;
   courseData: any;
@@ -33,6 +34,7 @@ export class CourseDetailComponent {
       this.courseData = res;
     })
   }
+
 
   isModalOpen = false;
   modalData: any;

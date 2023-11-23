@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertService } from 'src/app/service/alert.service';
 import { UserService } from 'src/app/service/user.service';
 
@@ -14,13 +15,34 @@ export class StudentComponent {
   name: string = '';
   keySearch: string = '';
 
+  isModalOpen = false;
+  modalData: any;
+
   constructor(
     private alertSrv: AlertService,
-    private userSrv:UserService
+    private userSrv:UserService,
+    private router: Router
   ){}
 
   ngOnInit() {
     this.getAllData();
+  }
+
+  openModal(record?: any) {
+    if (record) {
+      this.modalData = {
+        record: record,
+        title: 'Chỉnh sửa thông tin',
+        type: 'UPDATE'
+      };
+    } else {
+      this.modalData = {
+        title: 'Thêm khoá học mới',
+        type: 'CREATE'
+      };
+    }
+
+    this.isModalOpen = true;
   }
 
   getAllData(){
@@ -60,5 +82,13 @@ export class StudentComponent {
       this.page--;
       this.getAllData();
     }
+  }
+
+  onDetail(id: any) {
+    this.router.navigate(['/student/detail/', id], { queryParams: { type: 1 } });
+  }
+
+  onCloseModal() {
+    this.isModalOpen = false;
   }
 }
