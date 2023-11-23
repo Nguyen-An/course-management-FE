@@ -94,6 +94,7 @@ export class CourseComponent {
         break;
       }
     };
+    this.page = 1;
     this.getAllData();
   }
 
