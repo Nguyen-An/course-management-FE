@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AlertService } from 'src/app/service/alert.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-student',
@@ -6,20 +8,57 @@ import { Component } from '@angular/core';
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent {
-  students = [
-    { id: 1, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
-    { id: 2, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
-    { id: 3, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
-    { id: 4, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
-    { id: 5, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
-    { id: 6, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
-    { id: 7, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
-    { id: 8, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
-    { id: 9, name: 'Vũ Hà Nhi', address: 'Ngõ 224, Nguyễn Trãi, Hà Nôi', contact: '', details: '', action: '', selected: false },
-  ];
+  students: any[] = [];
+  paging: any = {};
+  page = 1;
+  name: string = '';
+  keySearch: string = '';
+
+  constructor(
+    private alertSrv: AlertService,
+    private userSrv:UserService
+  ){}
+
+  ngOnInit() {
+    this.getAllData();
+  }
+
+  getAllData(){
+    let option = {roleId: 1, sortDir: 'asc', page: this.page, userName: this.keySearch};
+    this.userSrv.getAll(option, (res: any) => {
+      this.students = res.elements;
+      this.paging = res.paging;
+    })
+  }
 
   selectAll(event: any): void {
     const checked = event.target.checked;
     this.students.forEach(student => student.selected = checked);
+  }
+
+  refreshData(){
+    this.getAllData();
+    this.alertSrv.showSuccess('Tải lại danh sách thành công', 'Thành công!');
+  }
+  onSearch(){
+    this.keySearch = this.name;
+    this.getAllData();
+  }
+  nextPage(){
+    if (this.paging.page == this.paging.totalPage){
+      this.alertSrv.showError('Không thể mở page tiếp theo', 'Lỗi!')
+    }else{
+      this.page++;
+      this.getAllData();
+    }
+  }
+
+  previousPage(){
+    if (this.paging.page == 1){
+      this.alertSrv.showError('Không thể mở page trước đó', 'Lỗi!')
+    }else{
+      this.page--;
+      this.getAllData();
+    }
   }
 }

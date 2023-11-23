@@ -4,10 +4,10 @@
     <div class="statistical">
         <div class="outline-input-search">
             <img src="../../../assets/image/icon-search.svg">
-            <input id="search" name="search" type="text" placeholder="Tìm kiếm..." class="ip-search">
+            <input id="search" name="search" type="text" placeholder="Tìm kiếm..." class="ip-search" [(ngModel)]="name" (keyup.enter)="onSearch()">
         </div>
         <div class="action">
-            <button class="btn btn-load">
+            <button class="btn btn-load" (click)="refreshData()">
                 <img src="../../../assets/image/icon-reload.svg">
                 Tải lại danh sách
             </button>
@@ -21,7 +21,7 @@
     <div class="out-line-title">
       <div class="title">Danh Sách Học Viên</div>
       <div class="action-btn">
-        <select name="source" id="source" style="margin-right: 20px;">
+        <!-- <select name="source" id="source" style="margin-right: 20px;">
           <option value="KH1">Tên khóa học</option>
           <option value="KH2">Tên khóa học 2</option>
         </select>
@@ -29,8 +29,8 @@
           <option value="province1">Tỉnh/ TP</option>
           <option value="province">Nghệ An</option>
           <option value="province">Nghệ Tĩnh</option>
-        </select>
-        <button class="btn-filter">Lọc kết quả</button>
+        </select> -->
+        <button class="btn-filter" (click)="onSearch()">Lọc kết quả</button>
       </div>
     </div>
 
@@ -52,8 +52,8 @@
             <td class="text-center">
               <input type="checkbox" [(ngModel)]="student.selected">
             </td>
-            <td class="text-left" style="width: 200px;">{{ student.name }}</td>
-            <td class="text-left"  style="width: 250px;"> {{ student.address }}</td>
+            <td class="text-left" style="width: 200px;">{{ student.userName }}</td>
+            <td class="text-left"  style="width: 250px;"> {{ student.userAddress }}</td>
             <td class="text-center contact"  style="width: 80px; ;">
                  <img src="../../../assets/image/icon-phone.svg">
                  <img src="../../../assets/image/icon-mail.svg">
@@ -66,9 +66,19 @@
             </td>
           </tr>
         </tbody>
-        <tfoot>
-            <button>Xoá danh sách được chọn</button>
-        </tfoot>
+        <tfoot style="display: flex; justify-content: space-between;">
+          <button>Xoá danh sách được chọn</button>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="margin-left: 20px;">Tổng số {{paging.totalRecord}} bản ghi</p>
+            <div
+              style="display: flex; align-items: center;"
+            >
+              <button (click)="previousPage()"><</button>
+              <div>Hiển thị trang thứ {{paging.page}} / {{paging.totalPage}} trang</div>
+              <button (click)="nextPage()">></button>
+            </div>
+          </div>
+      </tfoot>
       </table>
 
 </div>

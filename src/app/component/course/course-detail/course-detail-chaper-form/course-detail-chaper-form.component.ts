@@ -1,4 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/service/alert.service';
+import { ChapterService } from 'src/app/service/chapter.service';
 
 @Component({
   selector: 'app-course-detail-chaper-form',
@@ -14,15 +17,33 @@ export class CourseDetailChaperFormComponent {
     this.closeModal.emit();
   }
 
-  onSubmit() {
-    // Thực hiện các thao tác lưu trữ dữ liệu ở đây
-    console.log(
-      'Đã submit:',
-      this.courseName,
-      this.coursePrice,
-    );
+  courseId: any;
+
+  constructor(
+    private alerSrv: AlertService,
+    private chapterSrv: ChapterService,
+    private route: ActivatedRoute
+  ){
+    this.courseId = this.route.snapshot.paramMap.get('id');
   }
 
-  courseName: string = '';
-  coursePrice: string = '';
+  onSubmit() {
+    if (this.chapterTitle == '' || this.chapterNo == ''){
+      this.alerSrv.showError('Thông tin nhập chưa chính xác', 'Lỗi!');
+    }else{
+      this.chapterSrv.create(
+        {chapterTitle: this.chapterTitle, chapterNp: this.chapterNo},
+        (res: any) => {
+          if(res){
+            this.alerSrv.showSuccess('Thêm mới thành công', 'Thành công!');
+            this.onCloseModal();
+          }
+        },
+        this.courseId
+      )
+    }
+  }
+
+  chapterTitle: string = '';
+  chapterNo: string = '';
 }

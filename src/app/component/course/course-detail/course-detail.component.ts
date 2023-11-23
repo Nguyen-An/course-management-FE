@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/service/alert.service';
+import { ChapterService } from 'src/app/service/chapter.service';
+import { CourseService } from 'src/app/service/course.service';
 
 @Component({
   selector: 'app-course-detail',
@@ -7,14 +10,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./course-detail.component.scss']
 })
 export class CourseDetailComponent {
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private courseSrv: CourseService,
+    private route: ActivatedRoute,
+    private chapterSrv: ChapterService,
+    private alertSrv: AlertService
+    ) {
     
   }
 
-  courses = [
-    { id: 1, name: 'Ngữ văn 1', details: '', action: '', selected: false },
-    { id: 2, name: 'Ngữ văn 1', details: '', action: '', selected: false },
-  ];
+  courseId: any;
+  courseData: any;
+
+  ngOnInit(){
+    this.courseId = this.route.snapshot.paramMap.get('id');
+    this.getAllData();
+  }
+
+  getAllData(){
+    this.courseSrv.getDetail(this.courseId, (res: any) => {
+      this.courseData = res;
+    })
+  }
 
   isModalOpen = false;
   modalData: any;
@@ -25,9 +43,19 @@ export class CourseDetailComponent {
   }
   onCloseModal() {
     this.isModalOpen = false;
+    this.getAllData();
   }
 
   onSetupLesson(id: any) {
     this.router.navigate(['/course/detail/setup-lesson', id], { queryParams: { type: 1 } });
+  }
+
+  deleteChapter(chapterId: any){
+    this.chapterSrv.delete(chapterId, (res: any) => {
+      if(res){
+        this.alertSrv.showSuccess('Xóa thành công', 'Thành công!');
+        this.getAllData();
+      }
+    })
   }
 }
