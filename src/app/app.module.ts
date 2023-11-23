@@ -24,6 +24,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { LineComponent } from './component/home/line/line.component';
 import { ColumnComponent } from './component/home/column/column.component';
+import { TeacherFormComponent } from './component/teacher/teacher-form/teacher-form.component';
+import { TeacherDetailComponent } from './component/teacher/teacher-detail/teacher-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { ColumnComponent } from './component/home/column/column.component';
     StudentFormComponent,
     StudentDetailComponent,
     LineComponent,
-    ColumnComponent
+    ColumnComponent,
+    TeacherFormComponent,
+    TeacherDetailComponent
   ],
   imports: [
     BrowserModule,
