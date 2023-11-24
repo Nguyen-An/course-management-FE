@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
+import { AlertService } from 'src/app/service/alert.service';
 import { DocumentService } from 'src/app/service/document.service';
 import { LessonService } from 'src/app/service/lesson.service';
 import { QuestionService } from 'src/app/service/question.service';
@@ -13,9 +14,10 @@ export class CourseDetailLessonDetailComponent {
 
   typeId: any;
   lessonId: any;
-  lessonData: any;
+  lessonData: any = '';
 
-  constructor(
+  constructor( 
+    private alertSrv: AlertService,
     private lessonSrv: LessonService,
     private questionSrv: QuestionService,
     private route: ActivatedRoute,
@@ -67,6 +69,9 @@ export class CourseDetailLessonDetailComponent {
   isModalOpen = false;
   modalData: any;
 
+  isModalOpen2 = false;
+  modalData2: any;
+
   openModal(record?: any) {
     if (record) {
       this.modalData = {
@@ -102,10 +107,48 @@ export class CourseDetailLessonDetailComponent {
   }
 
 
+  openModalDocument2(record?: any) {
+    if (record) {
+      this.modalData2 = {
+        record: record,
+        title: 'Chỉnh sửa thông tin',
+        type: 'UPDATE'
+      };
+    } else {
+      this.modalData2 = {
+        title: 'Thêm bài tài liệu mới',
+        type: 'CREATE'
+      };
+    }
+
+    this.isModalOpen2 = true;
+  }
+
+
   onCloseModal() {
     this.isModalOpen = false;
     this.getAllData();
   }
 
+  onCloseModal2() {
+    this.isModalOpen2 = false;
+    this.getAllData();
+  }
+
+  deleteRecord1(id: any) {
+    
+  }
+
+  deleteRecord2(id: any) {
+    this.documentService.deleteDetail(id,
+      (res: any) => {
+        if (res) {
+          this.alertSrv.showSuccess('Xóa thành công dữ liệu', 'Thành công!');
+          this.onCloseModal();
+        }
+      },
+    )
+  }
+  
 
 }

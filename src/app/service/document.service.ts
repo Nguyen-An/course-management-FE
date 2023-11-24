@@ -85,8 +85,8 @@ export class DocumentService {
     )
   }
 
-  deleteDetail(option: any, callBack: Function): any {
-    this.http.get(baseUrl + `admin/document/${option}`, { observe: 'response', headers: this.headers}).subscribe(
+  deleteDetail(id: any, callBack: Function): any {
+    this.http.delete(baseUrl + `admin/document/${id}`, { observe: 'response', headers: this.headers}).subscribe(
       response => {
         if (response.body) {
           let body: any = Object.assign({}, response.body);
