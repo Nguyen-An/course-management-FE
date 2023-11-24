@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChapterService } from 'src/app/service/chapter.service';
 
 @Component({
   selector: 'app-course-detail-lesson',
@@ -9,35 +10,36 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CourseDetailLessonComponent {
   isModalOpen = false;
   modalData: any;
-  typeId: number = 0;
+  chapterId: any;
+  chapterData: any;
+  typeId: any;
 
-  students = [
-    { id: 1, name: 'Tên bài 1', link: 'Link video 1', describeLesson: 'Miêu tả 1', details: '', action: '', selected: false },
-    { id: 2, name: 'Tên bài 2', link: 'Link video 2', describeLesson: 'Miêu tả 2', details: '', action: '', selected: false },
-    { id: 3, name: 'Tên bài 3', link: 'Link video 3', describeLesson: 'Miêu tả 3', details: '', action: '', selected: false },
-    { id: 4, name: 'Tên bài 4', link: 'Link video 4', describeLesson: 'Miêu tả 4', details: '', action: '', selected: false },
-    { id: 5, name: 'Tên bài 5', link: 'Link video 5', describeLesson: 'Miêu tả 5', details: '', action: '', selected: false },
-    { id: 6, name: 'Tên bài 6', link: 'Link video 6', describeLesson: 'Miêu tả 6', details: '', action: '', selected: false },
-    { id: 7, name: 'Tên bài 7', link: 'Link video 7', describeLesson: 'Miêu tả 7', details: '', action: '', selected: false },
-  ];
-
-  constructor(private router: Router, private route: ActivatedRoute) {
-    
+  constructor(
+    private chapterSrv: ChapterService,
+    private router: Router,
+    private route: ActivatedRoute
+  ){
+    this.chapterId = this.route.snapshot.paramMap.get('id');
+    this.route.queryParams.subscribe(params => this.typeId = params['type']);
+    this.getAllData();
   }
 
   selectAll(event: any): void {
     const checked = event.target.checked;
-    this.students.forEach(student => student.selected = checked);
+    this.chapterData.lessonVos.forEach((item: any) => item.selected = checked);
   }
 
 
-  
+  getAllData(){
+    this.chapterSrv.getDetail(this.chapterId, (res: any) => {
+      if(res){
+        this.chapterData = res;
+      }
+    })
+  }
+
   ngOnInit() {
-    // Sử dụng paramMap để lấy giá trị của 'type' từ queryParams
-    this.route.queryParams.subscribe(params => {
-      this.typeId = params['type'];
-      console.log('Type ID:', this.typeId);
-    });
+  
   }
 
   openModal(record?: any) {
@@ -58,10 +60,11 @@ export class CourseDetailLessonComponent {
   }
   onCloseModal() {
     this.isModalOpen = false;
+    this.getAllData();
   }
 
   onDetail(id: any) {
-    this.router.navigate(['/course/detail/setup-lesson/detail/', id], { queryParams: { type: 1 } });
+    this.router.navigate(['/course/detail/setup-lesson/detail/', id], { queryParams: { type: this.typeId } });
   }
 
 }
