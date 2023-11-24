@@ -71,7 +71,7 @@ export class LessonService {
           let body: any = Object.assign({}, response.body);
           if (body) {
             if (callBack) {
-              callBack(response);
+              callBack(body);
             }
           }
         }
