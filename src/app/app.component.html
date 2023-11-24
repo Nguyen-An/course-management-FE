@@ -23,22 +23,23 @@
 
 
 <div class="body-login" *ngIf="!isAuthentication">
+  <img src="../assets/image/header-login.svg" class="img-header">
   <div class="background">
     <div class="shape"></div>
     <div class="shape"></div>
   </div>
   <form>
-    <h3>Login Here</h3>
+    <img src="../assets/image/text-login.svg" >
 
-    <label for="username">Username</label>
-    <input type="text" placeholder="Email or Phone" id="username" name="username" [(ngModel)]="username">
+    <label class="labelName" for="labelName">Username</label>
+    <input class="input-login" type="text" placeholder="Email or Phone" id="username" name="username" [(ngModel)]="username">
 
-    <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password" name="password" [(ngModel)]="password">
+    <label class="labelName" for="labelName">Password</label>
+    <input class="input-login" type="password" placeholder="Password" id="password" name="password" [(ngModel)]="password">
 
-    <button class="btn-login" (click)="login()">Đăng nhập</button>
-    <div class="social">
-      <div class="go">Đăng ký</div>
-    </div>
+    <button class="btn-login" (click)="login()">Đăng nhập <img src="../assets/image/icon-next.svg" alt=""></button>
+    <img class="img1" src="../assets/image/icon--1.svg">
+    <img class="img2" src="../assets/image/icon--2.svg">
+    <img class="img3" src="../assets/image/icon--3.svg">
   </form>
 </div>

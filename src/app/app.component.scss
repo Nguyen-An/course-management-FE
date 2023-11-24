@@ -15,7 +15,7 @@
 }
 
 .layout-container {
-  .sider{
+  .sider {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,20 +23,20 @@
     width: 295px;
     background: url('../assets/image/bg-sibar.png');
 
-    .logo{
+    .logo {
       display: flex;
       justify-content: center;
       margin: 24px 0 60px;
     }
 
-    .logo-bot{
+    .logo-bot {
       position: fixed;
       bottom: 24px;
       left: 60px;
     }
   }
 
-  .layout{
+  .layout {
     margin-left: 295px;
     background: #F5F5F5;
     min-height: 100vh;
@@ -44,10 +44,10 @@
     padding: 25px 48px;
   }
 
-  .item-sibar{
+  .item-sibar {
     margin: 20px 0;
 
-    a{
+    a {
       display: flex;
       align-items: center;
       color: rgba(146, 60, 60, 0.94);
@@ -55,12 +55,12 @@
       font-style: normal;
       font-weight: 600;
 
-      img{
+      img {
         margin: 0 20px;
       }
     }
 
-    a:hover{
+    a:hover {
       color: rgba(114, 8, 8, 0.94);
     }
   }
@@ -68,7 +68,7 @@
 }
 
 .body-login {
-  background-color: #080710;
+  background: url('../assets/image/back-ground-login.svg');
   width: 100vw;
   height: 100vh;
 
@@ -116,14 +116,15 @@
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 50px 35px;
+    text-align: center;
+
+
+
   }
 
   form * {
     font-family: 'Poppins', sans-serif;
-    color: #ffffff;
     letter-spacing: 0.5px;
-    outline: none;
-    border: none;
   }
 
   form h3 {
@@ -158,7 +159,6 @@
 
   button {
     margin-top: 50px;
-    width: 100%;
     background-color: #ffffff;
     color: #080710;
     padding: 15px 0;
@@ -168,17 +168,13 @@
     cursor: pointer;
   }
 
-  .btn-login {
-    color: #080710 !important;
-  }
-
   .social {
     margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    .go{
+
+    .go {
       cursor: pointer;
     }
 
@@ -206,4 +202,66 @@
     margin-right: 4px;
   }
 
+}
+
+.labelName {
+  color: var(--Black, #474646);
+  font-size: 20px !important  ;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%;
+  text-align: left !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.input-login {
+  border-radius: 50px !important;
+  border: 1px solid #C9C9C9;
+}
+
+.input-login::placeholder {
+  color: #999 !important;
+  /* Màu chữ của placeholder */
+}
+
+.btn-login {
+  border-radius: 80px !important;
+  background: #96ABCC !important;
+  color: #fff !important;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%;
+  padding: 15px 35px !important;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+form{
+  position: relative;
+
+  .img1{
+    position: absolute;
+    top: 236px;
+    right: -213px;
+  }
+  .img2{
+    position: absolute;
+    bottom: -62px;
+    left: -146px;
+    
+  }
+  .img3{
+    position: absolute;
+    top: 180px;
+    left: -70px;
+  }
+}
+
+.img-header{
+  position: fixed;
+  width: 100vw;
 }
