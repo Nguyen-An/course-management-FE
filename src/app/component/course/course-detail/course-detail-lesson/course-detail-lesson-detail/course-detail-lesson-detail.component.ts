@@ -17,7 +17,19 @@ export class CourseDetailLessonDetailComponent {
     { id: 6, question: 'Câu hỏi 6', answer1: 'Đáp án 1', answer2: 'Đáp án 2', answer3: 'Đáp án 3', answer4: 'Đáp án 4', correctAnswer: 'Câu trả lời', action: '', selected: false },
   ];
 
+  documents = [
+    { id: 1, name: 'tài liệu 1', nameFile: 'google', selected: false },
+    { id: 2, name: 'tài liệu 2', nameFile: 'google', selected: false },
+    { id: 3, name: 'tài liệu 3', nameFile: 'google', selected: false },
+    { id: 4, name: 'tài liệu 4', nameFile: 'google', selected: false },
+  ]
+
   selectAll(event: any): void {
+    const checked = event.target.checked;
+    this.questions.forEach(student => student.selected = checked);
+  }
+
+  selectAll2(event: any): void {
     const checked = event.target.checked;
     this.questions.forEach(student => student.selected = checked);
   }

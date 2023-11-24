@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertService } from 'src/app/service/alert.service';
 import { ReportService } from 'src/app/service/report.service';
 import { DatePipe } from '@angular/common';
+import { ExcelService } from 'src/app/service/excel.service';
 
 @Component({
   selector: 'app-report',
@@ -20,6 +21,7 @@ export class ReportComponent {
 
   isModalOpen = false;
   modalData: any;
+  fullData: Array<any>;
 
   option = 'option1';
 
@@ -33,13 +35,15 @@ export class ReportComponent {
   changeTopicId(e: any){
     this.topicId = Number(e.target.value);
     this.getAllData();
+    this.getFullData();
   } 
 
   constructor(
     private alertSrv: AlertService,
     private reportSrv: ReportService,
     private router: Router,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private excelService: ExcelService
   ){}
 
   cntStudent = 0;
@@ -47,6 +51,7 @@ export class ReportComponent {
   cntRevenue = 0; 
 
   ngOnInit() {
+    this.getFullData();
     this.getAllData();
     //handle abstract data
     this.reportSrv.student({}, (res: any) => {
@@ -89,6 +94,43 @@ export class ReportComponent {
             this.enrollments = res.elements;
             this.paging = res.paging;
             this.enrollments.forEach(item => {
+              if(item.status == 1) item.showStatus = 'Đã tham gia';
+              if(item.status == 1) item.showStatus = 'Đã hủy';
+              if(item.status == 1) item.showStatus = 'Chờ thanh toán';
+              item.showTime = this.datePipe.transform(item.created, 'dd/MM/yyyy', 'Asia/Ho_Chi_Minh');
+            })
+          }
+        });
+        break;
+      }
+    }
+  }
+
+  async getFullData() {
+    let option = {sortDir: 'desc'};
+    switch(this.topicId){
+      case 1:{
+        await this.reportSrv.student(option, (res: any) => {
+          if(res){
+            this.fullData = res.elements;
+          }
+        });
+        break;
+      }
+      case 2:{
+        await this.reportSrv.course(option, (res: any) => {
+          if(res){
+            this.fullData = res.elements;
+          }
+        });
+        break;
+      }
+      case 3:{
+        await this.reportSrv.class(option, (res: any) => {
+          if(res){
+            this.fullData = res.elements;
+            this.paging = res.paging;
+            this.fullData.forEach(item => {
               if(item.status == 1) item.showStatus = 'Đã tham gia';
               if(item.status == 1) item.showStatus = 'Đã hủy';
               if(item.status == 1) item.showStatus = 'Chờ thanh toán';
@@ -153,4 +195,9 @@ export class ReportComponent {
   onCloseModal() {
     this.isModalOpen = false;
   }
+
+  exportFile() {
+    this.excelService.exportToExcel(this.fullData, 'Báo cáo', 'Sheet1');
+  }
+
 }
