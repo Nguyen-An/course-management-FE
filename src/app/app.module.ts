@@ -29,6 +29,7 @@ import { TeacherFormComponent } from './component/teacher/teacher-form/teacher-f
 import { TeacherDetailComponent } from './component/teacher/teacher-detail/teacher-detail.component';
 import { TeacherDetailFormComponent } from './component/teacher/teacher-detail/teacher-detail-form/teacher-detail-form.component';
 import { PieComponent } from './component/report/pie/pie.component';
+import { CourseDetailLessonDetailFormDocumentComponent } from './component/course/course-detail/course-detail-lesson/course-detail-lesson-detail/course-detail-lesson-detail-form-document/course-detail-lesson-detail-form-document.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { PieComponent } from './component/report/pie/pie.component';
     TeacherFormComponent,
     TeacherDetailComponent,
     TeacherDetailFormComponent,
-    PieComponent
+    PieComponent,
+    CourseDetailLessonDetailFormDocumentComponent
   ],
   imports: [
     BrowserModule,
