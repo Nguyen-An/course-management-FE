@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
+import { DocumentService } from 'src/app/service/document.service';
 import { LessonService } from 'src/app/service/lesson.service';
 import { QuestionService } from 'src/app/service/question.service';
 
@@ -16,17 +17,25 @@ export class CourseDetailLessonDetailComponent {
   constructor(
     private lessonSrv: LessonService,
     private questionSrv: QuestionService,
-    private route: ActivatedRoute
-  ){
+    private route: ActivatedRoute,
+    private documentService: DocumentService,
+
+  ) {
     this.lessonId = this.route.snapshot.paramMap.get('id');
     this.route.params.subscribe(params => this.typeId = params['type']);
   }
 
-  ngOnInit(){
+  ngOnInit() {
+
     this.lessonSrv.getDetail(this.lessonId, (res: any) => {
-      if(res){
-        
+      if (res) {
+
       }
+    })
+
+    this.documentService.getAll(this.lessonId, (res: any) => {
+      this.documents = res.documents;
+      console.log(this.documents);
     })
   }
 
@@ -40,10 +49,11 @@ export class CourseDetailLessonDetailComponent {
   ];
 
   documents = [
-    { id: 1, name: 'tài liệu 1', nameFile: 'google', selected: false },
-    { id: 2, name: 'tài liệu 2', nameFile: 'google', selected: false },
-    { id: 3, name: 'tài liệu 3', nameFile: 'google', selected: false },
-    { id: 4, name: 'tài liệu 4', nameFile: 'google', selected: false },
+    {
+      documentId: 1,
+      documentLink: "google.com",
+      documentTitle: "Tài liệu tìm hiểu sâu",
+    }
   ]
 
   selectAll(event: any): void {
@@ -75,6 +85,25 @@ export class CourseDetailLessonDetailComponent {
 
     this.isModalOpen = true;
   }
+
+  openModalDocument(record?: any) {
+    if (record) {
+      this.modalData = {
+        record: record,
+        title: 'Chỉnh sửa thông tin',
+        type: 'UPDATE'
+      };
+    } else {
+      this.modalData = {
+        title: 'Thêm bài tài liệu mới',
+        type: 'CREATE'
+      };
+    }
+
+    this.isModalOpen = true;
+  }
+
+
   onCloseModal() {
     this.isModalOpen = false;
   }
