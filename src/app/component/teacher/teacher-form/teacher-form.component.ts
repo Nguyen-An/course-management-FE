@@ -33,22 +33,34 @@ export class TeacherFormComponent {
     if (this.name == '' || this.address == '' || this.phone == '' || this.email == ''){
       this.alertSrv.showError('Thông tin nhập chưa hợp lệ', 'Lỗi!');
     }else{
-      this.userSrv.create(2,
-        {userName: this.name, userEmail: this.email, userPhone: this.phone, userAddress: this.address},
-        (res: any) => {
-          if (res){
-            this.alertSrv.showSuccess('Thêm mới thành công', 'Thành công!');
-            this.onCloseModal();
+      if (this.data.type == 'UPDATE'){
+        this.userSrv.edit(
+          this.data.record.userId,
+          {userName: this.name, userEmail: this.email, userPhone: this.phone, userAddress: this.address},
+          (res: any) => {
+            if (res){
+              this.alertSrv.showSuccess('Chỉnh sửa thành công', 'Thành công!');
+              this.onCloseModal();
+            }
           }
-        }
-      )
+        )
+      }else{
+        this.userSrv.create(2,
+          {userName: this.name, userEmail: this.email, userPhone: this.phone, userAddress: this.address},
+          (res: any) => {
+            if (res){
+              this.alertSrv.showSuccess('Thêm mới thành công', 'Thành công!');
+              this.onCloseModal();
+            }
+          }
+        )
+      }
     }
   }
 
   ngOnChanges() {
     
     if (this.data?.type == 'UPDATE') {
-      console.log(this.data);
       this.name = this.data.record.userName;
       this.address = this.data.record.userAddress;
       this.phone = this.data.record.userPhone;
