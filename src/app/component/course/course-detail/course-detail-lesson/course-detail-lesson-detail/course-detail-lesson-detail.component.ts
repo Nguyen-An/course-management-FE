@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Route } from '@angular/router';
+import { LessonService } from 'src/app/service/lesson.service';
+import { QuestionService } from 'src/app/service/question.service';
 
 @Component({
   selector: 'app-course-detail-lesson-detail',
@@ -7,6 +10,25 @@ import { Component } from '@angular/core';
 })
 export class CourseDetailLessonDetailComponent {
 
+  typeId: any;
+  lessonId: any;
+
+  constructor(
+    private lessonSrv: LessonService,
+    private questionSrv: QuestionService,
+    private route: ActivatedRoute
+  ){
+    this.lessonId = this.route.snapshot.paramMap.get('id');
+    this.route.params.subscribe(params => this.typeId = params['type']);
+  }
+
+  ngOnInit(){
+    this.lessonSrv.getDetail(this.lessonId, (res: any) => {
+      if(res){
+        
+      }
+    })
+  }
 
   questions = [
     { id: 1, question: 'Câu hỏi 1', answer1: 'Đáp án 1', answer2: 'Đáp án 2', answer3: 'Đáp án 3', answer4: 'Đáp án 4', correctAnswer: 'Câu trả lời', action: '', selected: false },

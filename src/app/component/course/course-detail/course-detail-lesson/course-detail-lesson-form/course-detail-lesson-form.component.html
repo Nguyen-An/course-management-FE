@@ -3,7 +3,7 @@
     <div class="modal">
         <div>
             <div class="title-form">{{data.title}}</div>
-            <form (ngSubmit)="onSubmit()" class="my-form">
+            <form class="my-form">
                 <div class="out-line-ip">
                     <label for="courseName" class="label-ip">Link video:</label>
                     <input placeholder="Nhập link video" class="ip" type="text" id="courseName" name="courseName"
@@ -11,15 +11,15 @@
                 </div>
 
                 <div class="out-line-ip">
-                    <label for="coursePrice">Mô tả bài học:</label>
+                    <label for="coursePrice">Tiêu đề bài học:</label>
                     <div class="custom-textarea">
-                        <textarea [(ngModel)]="coursePrice" placeholder="Nhập mô tả bài học"></textarea>
+                        <textarea [(ngModel)]="coursePrice" name="coursePrice" placeholder="Nhập mô tả bài học"></textarea>
                     </div>
                 </div>
 
                 <div class="action-btn">
                     <button (click)="onCloseModal()" class="btn btn-close">Đóng</button>
-                    <button type="submit" class="btn btn-add">Xác nhận</button>
+                    <button type="submit" (click)="onSubmit()" class="btn btn-add">Xác nhận</button>
                 </div>
             </form>
         </div>

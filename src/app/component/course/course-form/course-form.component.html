@@ -15,6 +15,11 @@
                 </div>
 
                 <div class="out-line-ip" *ngIf="data.type === 'CREATE'">
+                    <label for="coursePrice">Lớp học:</label>
+                <input type="number" id="courseGrade" name="courseGrade" [(ngModel)]="grade" required>
+                </div>
+
+                <div class="out-line-ip" *ngIf="data.type === 'CREATE'">
                     <label for="courseCategory">Thể loại khóa học:</label>
                     <select id="courseCategory" name="courseCategory" [(ngModel)]="courseCategory" required>
                         <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>

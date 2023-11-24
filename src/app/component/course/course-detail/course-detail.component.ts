@@ -50,7 +50,7 @@ export class CourseDetailComponent {
   }
 
   onSetupLesson(id: any) {
-    this.router.navigate(['/course/detail/setup-lesson', id], { queryParams: { type: 1 } });
+    this.router.navigate(['/course/detail/setup-lesson', id], { queryParams: { type: this.courseData.courseType } });
   }
 
   deleteChapter(chapterId: any){
