@@ -26,6 +26,7 @@ import { LineComponent } from './component/home/line/line.component';
 import { ColumnComponent } from './component/home/column/column.component';
 import { TeacherFormComponent } from './component/teacher/teacher-form/teacher-form.component';
 import { TeacherDetailComponent } from './component/teacher/teacher-detail/teacher-detail.component';
+import { TeacherDetailFormComponent } from './component/teacher/teacher-detail/teacher-detail-form/teacher-detail-form.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { TeacherDetailComponent } from './component/teacher/teacher-detail/teach
     LineComponent,
     ColumnComponent,
     TeacherFormComponent,
-    TeacherDetailComponent
+    TeacherDetailComponent,
+    TeacherDetailFormComponent
   ],
   imports: [
     BrowserModule,
