@@ -32,6 +32,7 @@ export class CourseDetailComponent {
   getAllData(){
     this.courseSrv.getDetail(this.courseId, (res: any) => {
       this.courseData = res;
+      console.log(this.courseData);
     })
   }
 
