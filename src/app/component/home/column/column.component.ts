@@ -35,8 +35,8 @@ export class ColumnComponent {
     this.chartOptions = {
       series: [
         {
-          name: "Inflation",
-          data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
+          name: "Số học sinh",
+          data: [2, 3, 4, 10, 4, 3, 3, 2, 1, 7, 5, 3]
         }
       ],
       chart: {
@@ -53,7 +53,7 @@ export class ColumnComponent {
       dataLabels: {
         enabled: true,
         formatter: function(val: any) {
-          return val + "%";
+          return val;
         },
         offsetY: -20,
         style: {
@@ -127,12 +127,12 @@ export class ColumnComponent {
         labels: {
           show: false,
           formatter: function(val: any) {
-            return val + "%";
+            return val + " học viên";
           }
         }
       },
       title: {
-        text: "Biểu đồ số học sinh trong 5 tháng gần nhất",
+        text: "Biểu đồ số học sinh",
         offsetY: 320,
         align: "center",
         style: {

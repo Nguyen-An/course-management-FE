@@ -77,7 +77,6 @@ export class TeacherFormComponent {
     this.address = '';
     this.phone= '';
     this.email = '';
-    this.courseCategory= 'programming';
     this.closeModal.emit();
   }
 }

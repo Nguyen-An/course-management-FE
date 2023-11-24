@@ -6,7 +6,7 @@ import { AlertService } from './alert.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ChapterService {
+export class DashboardService {
 
   protected http: HttpClient;
   constructor(
@@ -22,8 +22,11 @@ export class ChapterService {
     Authorization: this.token
   };
 
-  delete(option: any, callBack: Function): any {
-    this.http.delete(baseUrl + `admin/chapter/${option}`, { observe: 'response', headers: this.headers }).subscribe(
+  getUser(option: any, callBack: Function): any {
+    let param = {};
+    param = Object.assign({}, option);
+
+    this.http.get(baseUrl + 'admin/user', { observe: 'response', params: param, headers: this.headers }).subscribe(
       (response) => {
         if (response.body) {
           callBack(response.body);
@@ -38,29 +41,11 @@ export class ChapterService {
     )
   }
 
-  create(data: any, callBack?: Function, option?: any): any {
-    this.http.post(baseUrl + `admin/chapter/course/${option}`, data, { observe: 'response', headers: this.headers }).subscribe(
-      response => {
-        if (response.body) {
-          let body: any = Object.assign({}, response.body);
-          if (body) {
-            if (callBack) {
-              callBack(response);
-            }
-          }
-        }
-      },
-      error => {
-        if (callBack) {
-          callBack(null);
-          this.alertSrv.showError('Something went wrong', 'Lỗi!');
-        }
-      }
-    )
-  }
+  getCourse(option: any, callBack: Function): any {
+    let param = {};
+    param = Object.assign({}, option);
 
-  getDetail(option: any, callBack: Function): any{
-    this.http.get(baseUrl + `admin/chapter/${option}`, { observe: 'response', headers: this.headers }).subscribe(
+    this.http.get(baseUrl + 'admin/course', { observe: 'response', params: param, headers: this.headers }).subscribe(
       (response) => {
         if (response.body) {
           callBack(response.body);
@@ -73,5 +58,5 @@ export class ChapterService {
         }
       }
     )
-  }
+  }  
 }

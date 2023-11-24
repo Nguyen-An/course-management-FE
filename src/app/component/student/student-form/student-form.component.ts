@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AlertService } from 'src/app/service/alert.service';
 import { CourseService } from 'src/app/service/course.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-student-form',
@@ -14,7 +16,10 @@ export class StudentFormComponent {
   userData: any;
   error: string = '';
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private userSrv: UserService,
+    private alertSrv: AlertService
+  ) {}
 
   name: string = '';
   address: string = '';
@@ -25,23 +30,41 @@ export class StudentFormComponent {
   categories: string[] = ['programming', 'design', 'business'];
 
   onSubmit() {
-    // Thực hiện các thao tác lưu trữ dữ liệu ở đây
-    console.log(
-      'Đã submit:',
-      this.name,
-      this.address,
-      this.phone,
-      this.email,
-      this.courseCategory
-    );
+    if (this.name == '' || this.address == '' || this.phone == '' || this.email == ''){
+      this.alertSrv.showError('Thông tin nhập chưa hợp lệ', 'Lỗi!');
+    }else{
+      if(this.data.type == 'UPDATE'){
+        this.userSrv.edit(
+          this.data.record.userId,
+          {userName: this.name, userEmail: this.email, userPhone: this.phone, userAddress: this.address},
+          (res: any) => {
+            if (res){
+              this.alertSrv.showSuccess('Chỉnh sửa thành công', 'Thành công!');
+              this.onCloseModal();
+            }
+          }
+        )
+      }else{
+        this.userSrv.create(1,
+          {userName: this.name, userEmail: this.email, userPhone: this.phone, userAddress: this.address},
+          (res: any) => {
+            if (res){
+              this.alertSrv.showSuccess('Thêm mới thành công', 'Thành công!');
+              this.onCloseModal();
+            }
+          }
+        )
+      }
+    }
   }
 
   ngOnChanges() {
     
     if (this.data?.type == 'UPDATE') {
-
-      // this.name = this.data.record.name;
-      // this.price = this.data.record.price;
+      this.name = this.data.record.userName;
+      this.address = this.data.record.userAddress;
+      this.phone = this.data.record.userPhone;
+      this.email = this.data.record.userEmail;
     }
   }
 
