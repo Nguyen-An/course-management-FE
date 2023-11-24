@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/service/alert.service';
 import { ChapterService } from 'src/app/service/chapter.service';
+import { LessonService } from 'src/app/service/lesson.service';
 
 @Component({
   selector: 'app-course-detail-lesson',
@@ -15,9 +17,12 @@ export class CourseDetailLessonComponent {
   typeId: any;
 
   constructor(
-    private chapterSrv: ChapterService,
+    private lessonService: LessonService,
+    private chapterService: ChapterService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertSrv: AlertService
+
   ){
     this.chapterId = this.route.snapshot.paramMap.get('id');
     this.route.queryParams.subscribe(params => this.typeId = params['type']);
@@ -31,7 +36,7 @@ export class CourseDetailLessonComponent {
 
 
   getAllData(){
-    this.chapterSrv.getDetail(this.chapterId, (res: any) => {
+    this.chapterService.getDetail(this.chapterId, (res: any) => {
       if(res){
         this.chapterData = res;
       }
@@ -61,10 +66,20 @@ export class CourseDetailLessonComponent {
   onCloseModal() {
     this.isModalOpen = false;
     this.getAllData();
-  }
+  } 
 
   onDetail(id: any) {
     this.router.navigate(['/course/detail/setup-lesson/detail/', id], { queryParams: { type: this.typeId } });
   }
 
+  deleteRecord(id: any) {
+    this.lessonService.deleteDetail(id,
+      (res: any) => {
+        if (res) {
+          this.alertSrv.showSuccess('Xóa thành công dữ liệu', 'Thành công!');
+          this.onCloseModal();
+        }
+      },
+    )
+  }
 }

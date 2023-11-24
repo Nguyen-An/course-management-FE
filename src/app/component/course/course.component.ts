@@ -120,4 +120,15 @@ export class CourseComponent {
       this.getAllData();
     }
   }
+
+  deleteRecord(id: any) {
+    this.courseSrv.deleteDetail(id,
+      (res: any) => {
+        if (res) {
+          this.alertSrv.showSuccess('Xóa thành công dữ liệu', 'Thành công!');
+          this.onCloseModal();
+        }
+      },
+    )
+  }
 }

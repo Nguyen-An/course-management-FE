@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-student-detail',
@@ -6,14 +8,42 @@ import { Component } from '@angular/core';
   styleUrls: ['./student-detail.component.scss']
 })
 export class StudentDetailComponent {
-  students = [
-    { id: 1, digitalTransactions: '#1234', implementationDate: '11/11/2023', nameCourse: 'Khoá ngữ văn 1', money: '1000000.0', status: 'Thành công'},
-    { id: 2, digitalTransactions: '#1234', implementationDate: '11/11/2023', nameCourse: 'Khoá ngữ văn 1', money: '1000000.0', status: 'Thành công'},
-    { id: 3, digitalTransactions: '#1234', implementationDate: '11/11/2023', nameCourse: 'Khoá ngữ văn 1', money: '1000000.0', status: 'Thành công'},
-    { id: 4, digitalTransactions: '#1234', implementationDate: '11/11/2023', nameCourse: 'Khoá ngữ văn 1', money: '1000000.0', status: 'Thành công'},
-    { id: 5, digitalTransactions: '#1234', implementationDate: '11/11/2023', nameCourse: 'Khoá ngữ văn 1', money: '1000000.0', status: 'Thành công'},
-    { id: 6, digitalTransactions: '#1234', implementationDate: '11/11/2023', nameCourse: 'Khoá ngữ văn 1', money: '1000000.0', status: 'Thành công'},
-    { id: 7, digitalTransactions: '#1234', implementationDate: '11/11/2023', nameCourse: 'Khoá ngữ văn 1', money: '1000000.0', status: 'Thành công'},
-    { id: 8, digitalTransactions: '#1234', implementationDate: '11/11/2023', nameCourse: 'Khoá ngữ văn 1', money: '1000000.0', status: 'Thành công'},
+  transactionResponseVOS = [
+    { transactionId: 1, courses: '#1234', transactionDate: '11/11/2023', transactionValue: 'Khoá ngữ văn 1', status: '1000000.0'},
   ];
+  
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+  ) {
+    
+  }
+  
+  userId: any;
+  userAddress = '';
+  userPhone = '';
+  userEmail = '';
+  userName = '';
+
+ngOnInit(){
+  this.userId = this.route.snapshot.paramMap.get('id');
+    
+    this.getAllData();
+  }
+
+  getAllData() {
+    this.userService.getDetail(this.userId, (res: any) => {
+        this.userAddress = res.userAddress;
+        this.userPhone = res.userPhone;
+        this.userEmail = res.userEmail;
+        this.userName = res.userName;
+        this.transactionResponseVOS = res.transactionResponseVOS;
+      })
+  }
+
+  convertStatus(status: any) {
+    if (status == '0') return 'Chưa Thanh Toán ';
+    if (status == '1') return 'Thành Công';
+    return 'Thất Bại ';
+  }
 }

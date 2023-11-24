@@ -74,4 +74,25 @@ export class ChapterService {
       }
     )
   }
+
+  deleteDetail(id: any, callBack: Function): any {
+    this.http.delete(baseUrl + `admin/chapter/${id}`, { observe: 'response', headers: this.headers}).subscribe(
+      response => {
+        if (response.body) {
+          let body: any = Object.assign({}, response.body);
+          if (body) {
+            if (callBack) {
+              callBack(response);
+            }
+          }
+        }
+      },
+      error => {
+        if (callBack) {
+          callBack(null);
+          this.alertSrv.showError('Something went wrong', 'Lỗi!');
+        }
+      }
+    )
+  }
 }

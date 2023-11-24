@@ -92,4 +92,15 @@ export class TeacherComponent {
   onDetail(id: any) {
     this.router.navigate(['/teacher/detail/', id]);
   }
+
+  deleteRecord(id: any) {
+    this.userSrv.deleteDetail(id,
+      (res: any) => {
+        if (res) {
+          this.alertSrv.showSuccess('Xóa thành công dữ liệu', 'Thành công!');
+          this.onCloseModal();
+        }
+      },
+    )
+  }
 }

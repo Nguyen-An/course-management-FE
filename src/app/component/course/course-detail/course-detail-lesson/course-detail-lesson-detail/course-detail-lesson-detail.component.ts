@@ -136,7 +136,14 @@ export class CourseDetailLessonDetailComponent {
   }
 
   deleteRecord1(id: any) {
-    
+    this.questionSrv.deleteDetail(id,
+      (res: any) => {
+        if (res) {
+          this.alertSrv.showSuccess('Xóa thành công dữ liệu', 'Thành công!');
+          this.onCloseModal();
+        }
+      },
+    )
   }
 
   deleteRecord2(id: any) {
