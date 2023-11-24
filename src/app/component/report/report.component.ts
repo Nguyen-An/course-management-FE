@@ -94,9 +94,9 @@ export class ReportComponent {
             this.enrollments = res.elements;
             this.paging = res.paging;
             this.enrollments.forEach(item => {
-              if(item.status == 1) item.showStatus = 'Đã tham gia';
-              if(item.status == 1) item.showStatus = 'Đã hủy';
-              if(item.status == 1) item.showStatus = 'Chờ thanh toán';
+              if(item.status == 1) item.showStatus = 'Đã Tham Gia';
+              if(item.status == 2) item.showStatus = 'Đã Hủy';
+              if(item.status == 0) item.showStatus = 'Đang Chờ Lớp';
               item.showTime = this.datePipe.transform(item.created, 'dd/MM/yyyy', 'Asia/Ho_Chi_Minh');
             })
           }

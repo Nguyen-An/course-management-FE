@@ -13,6 +13,7 @@ export class CourseDetailLessonDetailComponent {
 
   typeId: any;
   lessonId: any;
+  lessonData: any;
 
   constructor(
     private lessonSrv: LessonService,
@@ -25,11 +26,15 @@ export class CourseDetailLessonDetailComponent {
     this.route.params.subscribe(params => this.typeId = params['type']);
   }
 
-  ngOnInit() {
+  ngOnInit(){
+    this.getAllData();
+  }
 
+  getAllData(){
     this.lessonSrv.getDetail(this.lessonId, (res: any) => {
-      if (res) {
-
+      if(res){
+        this.lessonData = res;
+        this.questions = res.questions;
       }
     })
 
@@ -39,14 +44,7 @@ export class CourseDetailLessonDetailComponent {
     })
   }
 
-  questions = [
-    { id: 1, question: 'Câu hỏi 1', answer1: 'Đáp án 1', answer2: 'Đáp án 2', answer3: 'Đáp án 3', answer4: 'Đáp án 4', correctAnswer: 'Câu trả lời', action: '', selected: false },
-    { id: 2, question: 'Câu hỏi 2', answer1: 'Đáp án 1', answer2: 'Đáp án 2', answer3: 'Đáp án 3', answer4: 'Đáp án 4', correctAnswer: 'Câu trả lời', action: '', selected: false },
-    { id: 3, question: 'Câu hỏi 3', answer1: 'Đáp án 1', answer2: 'Đáp án 2', answer3: 'Đáp án 3', answer4: 'Đáp án 4', correctAnswer: 'Câu trả lời', action: '', selected: false },
-    { id: 4, question: 'Câu hỏi 4', answer1: 'Đáp án 1', answer2: 'Đáp án 2', answer3: 'Đáp án 3', answer4: 'Đáp án 4', correctAnswer: 'Câu trả lời', action: '', selected: false },
-    { id: 5, question: 'Câu hỏi 5', answer1: 'Đáp án 1', answer2: 'Đáp án 2', answer3: 'Đáp án 3', answer4: 'Đáp án 4', correctAnswer: 'Câu trả lời', action: '', selected: false },
-    { id: 6, question: 'Câu hỏi 6', answer1: 'Đáp án 1', answer2: 'Đáp án 2', answer3: 'Đáp án 3', answer4: 'Đáp án 4', correctAnswer: 'Câu trả lời', action: '', selected: false },
-  ];
+  questions: any[] = [];
 
   documents = [
     {
@@ -106,6 +104,7 @@ export class CourseDetailLessonDetailComponent {
 
   onCloseModal() {
     this.isModalOpen = false;
+    this.getAllData();
   }
 
 

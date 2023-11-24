@@ -63,7 +63,7 @@ export class PieComponent {
         width: 380,
         type: "pie"
       },
-      labels: ["Đã tham gia", "Đã hủy", "Chờ thanh toán"],
+      labels: ["Đã tham gia", "Đã hủy", "Đang Chờ Lớp"],
       responsive: [
         {
           breakpoint: 480,
