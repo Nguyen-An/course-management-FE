@@ -20,6 +20,7 @@ import { CourseDetailLessonDetailFormComponent } from './component/course/course
 import { StudentFormComponent } from './component/student/student-form/student-form.component';
 import { StudentDetailComponent } from './component/student/student-detail/student-detail.component';
 import { ToastrModule } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { LineComponent } from './component/home/line/line.component';
@@ -27,6 +28,7 @@ import { ColumnComponent } from './component/home/column/column.component';
 import { TeacherFormComponent } from './component/teacher/teacher-form/teacher-form.component';
 import { TeacherDetailComponent } from './component/teacher/teacher-detail/teacher-detail.component';
 import { TeacherDetailFormComponent } from './component/teacher/teacher-detail/teacher-detail-form/teacher-detail-form.component';
+import { PieComponent } from './component/report/pie/pie.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { TeacherDetailFormComponent } from './component/teacher/teacher-detail/t
     ColumnComponent,
     TeacherFormComponent,
     TeacherDetailComponent,
-    TeacherDetailFormComponent
+    TeacherDetailFormComponent,
+    PieComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,7 @@ import { TeacherDetailFormComponent } from './component/teacher/teacher-detail/t
     ToastrModule.forRoot(),
     NgApexchartsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

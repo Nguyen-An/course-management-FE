@@ -6,7 +6,7 @@ import { AlertService } from './alert.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ReportService {
 
   protected http: HttpClient;
   constructor(
@@ -21,11 +21,31 @@ export class UserService {
   headers = {
     Authorization: this.token
   };
-  getAll(option: any, callBack: Function): any {
+
+  class(option: any, callBack: Function): any {
+    let param = {};
+    param = Object.assign({}, option);
+
+    this.http.get(baseUrl + 'admin/enrollment', { observe: 'response', params: param, headers: this.headers }).subscribe(
+      (response) => {
+        if (response.body) {
+          callBack(response.body);
+        }
+      },
+      (error) => {
+        if (callBack) {
+          callBack(null);
+          this.alertSrv.showError('Something went wrong', 'Lỗi!');
+        }
+      }
+    )
+  }
+
+  course(option: any, callBack: Function): any{
     let param = {};
     param = Object.assign({size: 10}, option);
 
-    this.http.get(baseUrl + 'admin/user', { observe: 'response', params: param, headers: this.headers }).subscribe(
+    this.http.get(baseUrl + 'admin/report/course', { observe: 'response', params: param, headers: this.headers }).subscribe(
       (response) => {
         if (response.body) {
           callBack(response.body);
@@ -40,8 +60,11 @@ export class UserService {
     )
   }
 
-  create(option: any, data: any, callBack: Function): any {
-    this.http.post(baseUrl + `admin/user/role/${option}`, data, { observe: 'response', headers: this.headers}).subscribe(
+  student(option: any, callBack: Function): any{
+    let param = {};
+    param = Object.assign({}, option);
+
+    this.http.get(baseUrl + 'admin/report/student', { observe: 'response', params: param, headers: this.headers }).subscribe(
       (response) => {
         if (response.body) {
           callBack(response.body);
@@ -55,37 +78,4 @@ export class UserService {
       }
     )
   }
-
-  edit(option: any, data: any, callBack: Function): any {
-    this.http.put(baseUrl + `admin/user/${option}`, data, { observe: 'response', headers: this.headers}).subscribe(
-      (response) => {
-        if (response.body) {
-          callBack(response.body);
-        }
-      },
-      (error) => {
-        if (callBack) {
-          callBack(null);
-          this.alertSrv.showError('Something went wrong', 'Lỗi!');
-        }
-      }
-    )
-  }
-
-  getDetail(option: any, callBack: Function){
-    this.http.get(baseUrl + `admin/user/${option}`, { observe: 'response', headers: this.headers }).subscribe(
-      (response) => {
-        if (response.body) {
-          callBack(response.body);
-        }
-      },
-      (error) => {
-        if (callBack) {
-          callBack(null);
-          this.alertSrv.showError('Something went wrong', 'Lỗi!');
-        }
-      }
-    )
-  }
-
 }

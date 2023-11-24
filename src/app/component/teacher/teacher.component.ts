@@ -90,8 +90,6 @@ export class TeacherComponent {
   }
 
   onDetail(id: any) {
-    console.log(id);
-    
-    this.router.navigate(['/teacher/detail/', id], { queryParams: { type: 1 } });
+    this.router.navigate(['/teacher/detail/', id]);
   }
 }
