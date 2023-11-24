@@ -34,7 +34,7 @@ export class LineComponent {
     this.chartOptions = {
       series: [
         {
-          name: "Desktops",
+          name: "Doanh thu",
           data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
         }
       ],
@@ -52,7 +52,7 @@ export class LineComponent {
         curve: "straight"
       },
       title: {
-        text: "Biểu đồ doanh thu 5 tháng gần nhất",
+        text: "Biểu đồ doanh thut",
         align: "center"
       },
       grid: {

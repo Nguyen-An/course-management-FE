@@ -37,7 +37,7 @@ export class StudentComponent {
       };
     } else {
       this.modalData = {
-        title: 'Thêm khoá học mới',
+        title: 'Thêm học viên mới',
         type: 'CREATE'
       };
     }
@@ -46,7 +46,7 @@ export class StudentComponent {
   }
 
   getAllData(){
-    let option = {roleId: 1, sortDir: 'asc', page: this.page, userName: this.keySearch};
+    let option = {roleId: 1, sortDir: 'desc', page: this.page, userName: this.keySearch};
     this.userSrv.getAll(option, (res: any) => {
       this.students = res.elements;
       this.paging = res.paging;
@@ -90,5 +90,6 @@ export class StudentComponent {
 
   onCloseModal() {
     this.isModalOpen = false;
+    this.getAllData();
   }
 }
