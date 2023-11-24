@@ -15,11 +15,17 @@ export class CourseService {
     this.http = injector.get(HttpClient);
   }
 
+  private token: string = String(localStorage.getItem('token'));
+
+  headers = {
+    Authorization: this.token
+  };
+
   getAll(option: any, callBack: Function): any {
     let param = {};
     param = Object.assign({size: 10}, option);
 
-    this.http.get(baseUrl + 'course', { observe: 'response', params: param }).subscribe(
+    this.http.get(baseUrl + 'admin/course', { observe: 'response', params: param, headers: this.headers }).subscribe(
       (response) => {
         if (response.body) {
           callBack(response.body);
@@ -35,7 +41,7 @@ export class CourseService {
   }
 
   edit(data: any, option?: any, callBack?: Function): any {
-    this.http.put(baseUrl + `course/${option}`, data, { observe: 'response' }).subscribe(
+    this.http.put(baseUrl + `admin/course/${option}`, data, { observe: 'response', headers: this.headers }).subscribe(
       response => {
         if (response.body) {
           let body: any = Object.assign({}, response.body);
@@ -56,7 +62,7 @@ export class CourseService {
   }
 
   create(data: any, callBack?: Function): any {
-    this.http.post(baseUrl + 'course', data, { observe: 'response' }).subscribe(
+    this.http.post(baseUrl + 'admin/course', data, { observe: 'response', headers: this.headers }).subscribe(
       response => {
         if (response.body) {
           let body: any = Object.assign({}, response.body);
@@ -77,7 +83,7 @@ export class CourseService {
   }
 
   getDetail(option: any, callBack: Function): any{
-    this.http.get(baseUrl + `course/${option}`, { observe: 'response' }).subscribe(
+    this.http.get(baseUrl + `admin/course/${option}`, { observe: 'response', headers: this.headers }).subscribe(
       (response) => {
         if (response.body) {
           callBack(response.body);

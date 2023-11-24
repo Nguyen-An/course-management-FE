@@ -16,8 +16,14 @@ export class ChapterService {
     this.http = injector.get(HttpClient);
   }
 
+  private token: string = String(localStorage.getItem('token'));
+
+  headers = {
+    Authorization: this.token
+  };
+
   delete(option: any, callBack: Function): any {
-    this.http.delete(baseUrl + `chapter/${option}`, { observe: 'response' }).subscribe(
+    this.http.delete(baseUrl + `admin/chapter/${option}`, { observe: 'response', headers: this.headers }).subscribe(
       (response) => {
         if (response.body) {
           callBack(response.body);
@@ -33,7 +39,7 @@ export class ChapterService {
   }
 
   create(data: any, callBack?: Function, option?: any): any {
-    this.http.post(baseUrl + `chapter/course/${option}`, data, { observe: 'response' }).subscribe(
+    this.http.post(baseUrl + `admin/chapter/course/${option}`, data, { observe: 'response', headers: this.headers }).subscribe(
       response => {
         if (response.body) {
           let body: any = Object.assign({}, response.body);

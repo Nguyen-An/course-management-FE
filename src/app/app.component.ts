@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './service/auth.service';
+import { AlertService } from './service/alert.service';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,15 @@ export class AppComponent {
   token: any;
 
   constructor(
-    private authSrv: AuthService
+    private authSrv: AuthService,
+    private alertSrv: AlertService
   ){}
 
   ngOnInit(){
     this.authSrv.isAuthentication.subscribe(value => this.isAuthentication = value);
-    // this.authSrv.isAuthentication.next(true);
+    if(localStorage.getItem('token')){
+      this.authSrv.isAuthentication.next(true);
+    }
   }
   
   // xử lý đăng nhập
@@ -29,8 +33,15 @@ export class AppComponent {
         if(res){
           this.isAuthentication = true;
           this.authSrv.isAuthentication.next(true);
+          this.alertSrv.showSuccess('Đăng nhập thành công', 'Thành công!');
         }
       }
     )
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    this.authSrv.isAuthentication.next(false);
+    this.alertSrv.showSuccess('Đăng xuất thành công', 'Thành công!');
   }
 }
