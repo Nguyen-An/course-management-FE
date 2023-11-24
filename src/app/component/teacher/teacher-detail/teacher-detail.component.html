@@ -37,25 +37,14 @@
             <div class="title-content">Giới Thiệu</div>
 
             <ul class="content-item">
-                <li>Tính cách hoà đồng, cởi mở, tự tin</li>
-                <li>Dễ thương, xinh gái tuyệt vời</li>
-                <li>Nấu ăn các kiểu chơi hết</li>
+                <li>Ngày sinh: {{userData.showTime}}</li>
+                <li>Giới tính: {{userData.userGender == 1 ? 'Nam' : 'Nữ'}}</li>
             </ul>
 
-            <div class="title-content">Quá Trình Học Tập</div>
+            <div class="title-content">Trạng thái</div>
 
             <ul class="content-item">
-                <li>Học tại trường đại học sư phạm - Khoa văn (2020-2025)</li>
-                <li>Học tại trường đại học Backs khoas - Khoa toán (2020-2025)</li>
-                <li>Học tại trường đại học kinh tế - Khoa anh (2020-2025)</li>
-            </ul>
-
-            <div class="title-content">Chuyên Môn</div>
-
-            <ul class="content-item">
-                <li>Ngữ văn cấp lớp 10</li>
-                <li>Ngữ văn cấp lớp 11</li>
-                <li>Ngữ văn cấp lớp 13</li>
+                <li>{{userData.teachingStatus == 1 ? 'Đã Được Phân Lớp' : 'Chưa Được Phân Lớp'}}</li>
             </ul>
         </div>
 
